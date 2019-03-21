@@ -1,0 +1,43 @@
+---
+dist: xenial
+language: minimal
+
+env:
+  global:
+    - fast_finish: true
+    - DOCKER_NAMESPACE=lansible
+    - CONTAINER_NAME=mosquitto
+
+services:
+  - docker
+
+matrix:
+  include:
+    - env: ARCH=amd64
+    - env: ARCH=x86_64
+    - env: ARCH=x86
+    - env: ARCH=arm64
+    - env: ARCH=aarch64
+    - env: ARCH=i386
+
+before_script:
+  - docker pull ${DOCKER_NAMESPACE}/${CONTAINER_NAME}:${ARCH}
+
+script:
+  - docker build .
+      --build-arg ARCH=${ARCH}
+      --cache-from ${DOCKER_NAMESPACE}/${CONTAINER_NAME}:${ARCH}
+      --tag ${DOCKER_NAMESPACE}/${CONTAINER_NAME}:${ARCH}
+  - docker run ${DOCKER_NAMESPACE}/${CONTAINER_NAME}:${ANSIBLE_VERSION} molecule --help
+
+deploy:
+  provider: script
+  script: ci/deploy.sh
+  on:
+    branch: master
+  skip_cleanup: true
+
+notifications:
+  email:
+    on_failure: change
+    on_success: never

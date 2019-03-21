@@ -1,0 +1,18 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mosquitto
+  # Change if you want to deploy to somewhere other then default
+  namespace: default
+  labels:
+    app: mosquitto
+spec:
+  selector:
+    app: mosquitto
+  ports:
+    - port: 1883
+      nodePort: 31883
+      name: mqtt
+      targetPort: mqtt
+  type: NodePort
