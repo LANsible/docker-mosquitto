@@ -21,6 +21,7 @@ matrix:
     - env: ARCH=i386
 
 before_script:
+  - docker run --rm --privileged multiarch/qemu-user-static:register --reset
   - docker pull ${DOCKER_NAMESPACE}/${CONTAINER_NAME}:${ARCH}
 
 script:
@@ -28,11 +29,12 @@ script:
       --build-arg ARCH=${ARCH}
       --cache-from ${DOCKER_NAMESPACE}/${CONTAINER_NAME}:${ARCH}
       --tag ${DOCKER_NAMESPACE}/${CONTAINER_NAME}:${ARCH}
-  - docker run ${DOCKER_NAMESPACE}/${CONTAINER_NAME}:${ANSIBLE_VERSION} molecule --help
+
+#TODO: Write a test stage
 
 deploy:
   provider: script
-  script: ci/deploy.sh
+  script: deploy/deploy.sh
   on:
     branch: master
   skip_cleanup: true
