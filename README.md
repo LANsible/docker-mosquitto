@@ -27,16 +27,16 @@ The repository contains a basic Docker Compose file which works with Swarm.
 Use this or use it as a good start!
 
 ```yaml
-cd deploy/docker-compose
+cd examples/docker-compose
 docker-compose up -d mosquitto
 ```
 ### Kubernetes
 
-The kubectl files in the deploy/kubernetes I use myself to deploy.
+The kubectl files in the examples/kubernetes I use myself to deploy.
 It uses a configmap for the configuration and it exposes mosquitto on Nodeport 31883 with a service.
 
 ```yaml
-kubectl apply -f deploy/kubernetes
+kubectl apply -f examples/kubernetes
 ```
 
 ## Getting the password for in the passwords file

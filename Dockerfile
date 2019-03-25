@@ -66,7 +66,6 @@ COPY --from=builder \
 
 # Copy mosquitto from builder
 COPY --from=builder /build/mosq/src/mosquitto /usr/sbin/mosquitto
-COPY --from=builder /build/mosq/src/mosquitto_passwd /usr/sbin/mosquitto_passwd
 COPY --from=builder /build/mosq/mosquitto.conf /mosquitto/config/mosquitto.conf
 
 # Copy needed libs from builder
