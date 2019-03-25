@@ -1,0 +1,46 @@
+---
+dist: xenial
+language: minimal
+
+env:
+  global:
+    - fast_finish: true
+    - DOCKER_NAMESPACE=lansible
+    - CONTAINER_NAME=mosquitto
+
+services:
+  - docker
+
+matrix:
+  include:
+    - env: ARCH=amd64
+    - env: ARCH=x86_64
+    - env: ARCH=x86
+    - env: ARCH=arm64
+    - env: ARCH=aarch64
+    - env: ARCH=i386
+
+before_script:
+  - docker run --rm --privileged multiarch/qemu-user-static:register --reset
+  # Pipe to true since the tag could be non existing
+  - docker pull ${DOCKER_NAMESPACE}/${CONTAINER_NAME}:${ARCH} || true
+
+script:
+  - docker build .
+      --build-arg ARCH=${ARCH}
+      --cache-from ${DOCKER_NAMESPACE}/${CONTAINER_NAME}:${ARCH}
+      --tag ${DOCKER_NAMESPACE}/${CONTAINER_NAME}:${ARCH}
+
+#TODO: Write a test stage
+
+deploy:
+  provider: script
+  script: deploy/deploy.sh
+  on:
+    branch: master
+  skip_cleanup: true
+
+notifications:
+  email:
+    on_failure: change
+    on_success: never
