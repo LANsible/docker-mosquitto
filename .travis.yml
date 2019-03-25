@@ -22,7 +22,8 @@ matrix:
 
 before_script:
   - docker run --rm --privileged multiarch/qemu-user-static:register --reset
-  - docker pull ${DOCKER_NAMESPACE}/${CONTAINER_NAME}:${ARCH}
+  # Pipe to true since the tag could be non existing
+  - docker pull ${DOCKER_NAMESPACE}/${CONTAINER_NAME}:${ARCH} || true
 
 script:
   - docker build .
