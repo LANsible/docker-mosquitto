@@ -15,7 +15,6 @@ matrix:
   include:
     - env: ARCH=amd64
     - env: ARCH=arm64
-    - env: ARCH=aarch64
     - env: ARCH=i386
 
 before_script:

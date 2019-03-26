@@ -9,11 +9,7 @@ manifests:
     platform:
       architecture: arm64
       os: linux
-  - image: lansible/mosquitto:aarch64
-    platform:
-      architecture: aarch64
-      os: linux
   - image: lansible/mosquitto:i386
     platform:
-      architecture: i386
+      architecture: '386'
       os: linux
