@@ -5,10 +5,6 @@ manifests:
     platform:
       architecture: amd64
       os: linux
-  - image: lansible/mosquitto:x86_64
-    platform:
-      architecture: x86_64
-      os: linux
   - image: lansible/mosquitto:x86
     platform:
       architecture: x86
