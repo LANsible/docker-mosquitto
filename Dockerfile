@@ -78,4 +78,4 @@ COPY --from=builder \
 
 USER mosquitto
 ENTRYPOINT ["/usr/sbin/mosquitto"]
-CMD ["-c", "/mosquitto/config/mosquitto.conf"]
+CMD ["-c", "/mosquitto/mosquitto.conf"]
