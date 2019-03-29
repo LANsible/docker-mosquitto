@@ -5,8 +5,8 @@ When I tried to run the official Mosquitto container on Kubernetes I couldn't ge
 Since Kubernetes 1.9.6 the configmaps are readonly, the directory where they are mounted to are also mounted readonly.
 The current mosquitto container breaks on this due the hardcoded VOLUME definition.
 I could mitigate this by mounting the config to somewhere else then /mosquitto but the VOLUME mount in the Dockerfile is just ugly.
-Also this container is way smaller!  
- 
+Also this container is way smaller!
+
 ## Running the container
 
 The default credentials are:
