@@ -4,7 +4,7 @@ FROM multiarch/alpine:${ARCH}-v3.9 as builder
 LABEL maintainer="Wilmar den Ouden" \
     description="Eclipse Mosquitto MQTT Broker, the right way"
 
-ARG MOSQUITTO_VERSION=master
+ARG VERSION=master
 
 RUN addgroup -S -g 1883 mosquitto 2>/dev/null && \
     adduser -S -u 1883 -D -H -h /var/empty -s /sbin/nologin -G mosquitto -g mosquitto mosquitto 2>/dev/null
@@ -17,7 +17,7 @@ RUN apk --no-cache add \
         libressl-dev \
         util-linux-dev
 
-RUN git clone --depth 1 --branch "${MOSQUITTO_VERSION}" https://github.com/eclipse/mosquitto.git /mosquitto
+RUN git clone --depth 1 --branch "${VERSION}" https://github.com/eclipse/mosquitto.git /mosquitto
 
 RUN make -C /mosquitto -j "$(nproc)" \
         CFLAGS="-Wall -O2" \
