@@ -57,6 +57,6 @@ COPY --from=builder \
     /lib/libuuid.so.1 \
     /lib/
 
-# USER mosquitto
+USER mosquitto
 ENTRYPOINT ["/usr/sbin/mosquitto"]
 CMD ["-c", "/mosquitto/mosquitto.conf"]
