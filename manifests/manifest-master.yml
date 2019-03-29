@@ -1,0 +1,15 @@
+---
+image: lansible/mosquitto:master
+manifests:
+  - image: lansible/mosquitto:master-amd64
+    platform:
+      architecture: amd64
+      os: linux
+  - image: lansible/mosquitto:master-arm64
+    platform:
+      architecture: arm64
+      os: linux
+  - image: lansible/mosquitto:master-i386
+    platform:
+      architecture: '386'
+      os: linux

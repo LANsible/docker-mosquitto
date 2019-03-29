@@ -1,21 +1,8 @@
 ---
 image: lansible/mosquitto:latest
-manifests:
-  - image: lansible/mosquitto:v1.5.8-amd64
-    platform:
-      architecture: amd64
-      os: linux
-  - image: lansible/mosquitto:v1.5.8-arm64
-    platform:
-      architecture: arm64
-      os: linux
-  - image: lansible/mosquitto:v1.5.8-i386
-    platform:
-      architecture: '386'
-      os: linux
-
----
-image: lansible/mosquitto:v1.5.8
+tags:
+  - 1.5.8
+  - 1.5
 manifests:
   - image: lansible/mosquitto:v1.5.8-amd64
     platform:
