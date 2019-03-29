@@ -13,18 +13,36 @@ services:
 
 matrix:
   include:
-    - env: ARCH=amd64
-    - env: ARCH=arm64
-    - env: ARCH=i386
+    # amd64
+    - env: MOSQUITTO_VERSION=v1.5.8 TAGS="1.5.8 latest" ARCH=amd64
+    - env: MOSQUITTO_VERSION=master TAGS="master" ARCH=amd64
+
+    # arm64
+    - env: MOSQUITTO_VERSION=v1.5.8 TAGS="1.5.8 latest" ARCH=arm64
+    - env: MOSQUITTO_VERSION=master TAGS="master" ARCH=arm64
+
+    # i386
+    - env: MOSQUITTO_VERSION=v1.5.8 TAGS="1.5.8 latest" ARCH=i386
+    - env: MOSQUITTO_VERSION=master TAGS="master" ARCH=i386
 
 before_script:
   - docker run --rm --privileged multiarch/qemu-user-static:register --reset
   # Pipe to true since the tag could be non existing
+  - docker pull ${DOCKER_NAMESPACE}/${CONTAINER_NAME}:builder || true
   - docker pull ${DOCKER_NAMESPACE}/${CONTAINER_NAME}:${ARCH} || true
 
 script:
+  # Build and push builder for faster image builds
+  # https://github.com/moby/moby/issues/3471
   - docker build .
       --build-arg ARCH=${ARCH}
+      --target builder
+      --tag ${DOCKER_NAMESPACE}/${CONTAINER_NAME}:builder
+
+  # Build Mosquitto container
+  - docker build .
+      --build-arg ARCH=${ARCH}
+      --cache-from ${DOCKER_NAMESPACE}/${CONTAINER_NAME}:builder
       --cache-from ${DOCKER_NAMESPACE}/${CONTAINER_NAME}:${ARCH}
       --tag ${DOCKER_NAMESPACE}/${CONTAINER_NAME}:${ARCH}
 
