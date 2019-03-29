@@ -1,8 +1,8 @@
 ---
 image: lansible/mosquitto:latest
 tags:
-  - 1.5.8
-  - 1.5
+  - v1.5.8
+  - v1.5
 manifests:
   - image: lansible/mosquitto:v1.5.8-amd64
     platform:
