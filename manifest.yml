@@ -1,15 +1,15 @@
 ---
 image: lansible/mosquitto:latest
 manifests:
-  - image: lansible/mosquitto:amd64-v1.5.8
+  - image: lansible/mosquitto:v1.5.8-amd64
     platform:
       architecture: amd64
       os: linux
-  - image: lansible/mosquitto:arm64-v1.5.8
+  - image: lansible/mosquitto:v1.5.8-arm64
     platform:
       architecture: arm64
       os: linux
-  - image: lansible/mosquitto:i386-v1.5.8
+  - image: lansible/mosquitto:v1.5.8-i386
     platform:
       architecture: '386'
       os: linux
@@ -17,15 +17,15 @@ manifests:
 ---
 image: lansible/mosquitto:v1.5.8
 manifests:
-  - image: lansible/mosquitto:amd64-v1.5.8
+  - image: lansible/mosquitto:v1.5.8-amd64
     platform:
       architecture: amd64
       os: linux
-  - image: lansible/mosquitto:arm64-v1.5.8
+  - image: lansible/mosquitto:v1.5.8-arm64
     platform:
       architecture: arm64
       os: linux
-  - image: lansible/mosquitto:i386-v1.5.8
+  - image: lansible/mosquitto:v1.5.8-i386
     platform:
       architecture: '386'
       os: linux
@@ -33,15 +33,15 @@ manifests:
 ---
 image: lansible/mosquitto:master
 manifests:
-  - image: lansible/mosquitto:amd64-master
+  - image: lansible/mosquitto:master-amd64
     platform:
       architecture: amd64
       os: linux
-  - image: lansible/mosquitto:arm64-master
+  - image: lansible/mosquitto:master-arm64
     platform:
       architecture: arm64
       os: linux
-  - image: lansible/mosquitto:i386-master
+  - image: lansible/mosquitto:master-i386
     platform:
       architecture: '386'
       os: linux
