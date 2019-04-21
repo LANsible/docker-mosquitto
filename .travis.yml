@@ -26,7 +26,7 @@ before_script:
   - docker run --rm --privileged multiarch/qemu-user-static:register --reset
   # Pipe to true since the tag could be non existing
   - docker pull ${DOCKER_NAMESPACE}/${CONTAINER_NAME}:${VERSION}-${ARCH} || true
-  - docker pull ${DOCKER_NAMESPACE}/${CONTAINER_NAME}:${VERSION}-${ARCH}-builder || true
+  - docker pull ${DOCKER_NAMESPACE}/${CONTAINER_NAME}:latest || true
 
 script:
   # Needed for naming difference between manifest-tool and Alpine multiarch image
@@ -35,22 +35,11 @@ script:
     else
       ALPINE_ARCH="${ARCH}";
     fi
-  # Build and push builder for faster image builds
-  # https://github.com/moby/moby/issues/3471
-  - docker build .
-      --target builder
-      --build-arg ARCH=${ALPINE_ARCH}
-      --build-arg VERSION=${VERSION}
-      --cache-from ${DOCKER_NAMESPACE}dump/${CONTAINER_NAME}:${VERSION}-${ARCH}-builder
-      --tag ${DOCKER_NAMESPACE}dump/${CONTAINER_NAME}:${VERSION}-${ARCH}-builder
-  - echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
-  - docker push ${DOCKER_NAMESPACE}dump/${CONTAINER_NAME}:${VERSION}-${ARCH}-builder
-
   # Build Mosquitto container
   - docker build .
       --build-arg ARCH=${ALPINE_ARCH}
       --build-arg VERSION=${VERSION}
-      --cache-from ${DOCKER_NAMESPACE}dump/${CONTAINER_NAME}:builder-${ARCH}
+      --cache-from ${DOCKER_NAMESPACE}dump/${CONTAINER_NAME}:latest
       --cache-from ${DOCKER_NAMESPACE}/${CONTAINER_NAME}:${VERSION}-${ARCH}
       --tag ${DOCKER_NAMESPACE}/${CONTAINER_NAME}:${VERSION}-${ARCH}
 
