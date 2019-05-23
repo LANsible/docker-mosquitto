@@ -49,7 +49,7 @@ deploy:
   provider: script
   script: deploy/deploy.sh
   on:
-    branch: master
+    tags: true
   skip_cleanup: true
 
 notifications:
