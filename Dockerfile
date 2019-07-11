@@ -1,10 +1,9 @@
-ARG ARCH=amd64
-FROM multiarch/alpine:${ARCH}-v3.9 as builder
-
-LABEL maintainer="Wilmar den Ouden" \
-    description="Eclipse Mosquitto MQTT Broker, the right way"
+FROM alpine:3.10 as builder
 
 ARG VERSION=master
+
+LABEL maintainer="wilmardo" \
+      description="Eclipse Mosquitto MQTT Broker, the right way"
 
 RUN addgroup -S -g 1883 mosquitto 2>/dev/null && \
     adduser -S -u 1883 -D -H -h /var/empty -s /sbin/nologin -G mosquitto -g mosquitto mosquitto 2>/dev/null
@@ -35,10 +34,11 @@ RUN make -C /mosquitto -j "$(nproc)" \
         binary
 
 # Minify binaries
-COPY --from=lansible/upx:3.95 /usr/bin/upx /usr/bin/upx
-RUN upx --best /mosquitto/src/mosquitto
+# --brute does not work
+RUN apk add --no-cache upx && \
+    upx --best /mosquitto/src/mosquitto
 
-FROM multiarch/alpine:${ARCH}-v3.9
+FROM alpine:3.10
 
 # Copy users from builder
 COPY --from=builder \
