@@ -1,5 +1,10 @@
 #  🦟 Mosquitto in Docker the right way
 
+[![Build Status](https://cloud.drone.io/api/badges/LANsible/docker-mosquitto/status.svg)](https://cloud.drone.io/LANsible/docker-mosquitto)
+[![Docker Pulls](https://img.shields.io/docker/pulls/lansible/mosquitto.svg)](https://hub.docker.com/r/lansible/hoem-assistant)
+[![Docker Version](https://images.microbadger.com/badges/version/lansible/mosquitto:latest.svg)](https://microbadger.com/images/lansible/mosquitto:latest)
+[![Docker Size/Layers](https://images.microbadger.com/badges/image/lansible/mosquitto:latest.svg)](https://microbadger.com/images/lansible/mosquitto:latest)
+
 ## Why another mosquitto container?
 When I tried to run the official Mosquitto container on Kubernetes I couldn't get it to work with a configmap.
 Since Kubernetes 1.9.6 the configmaps are readonly, the directory where they are mounted to are also mounted readonly.
