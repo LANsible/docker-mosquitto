@@ -1,15 +1,18 @@
 ---
-image: docker:19.03.5
+image: docker:19.03
 
 services:
-  - docker:19.03.5-dind
+  - docker:19.03-dind
 
 variables:
-  DOCKER_CLI_EXPERIMENTAL: enabled
-  DOCKER_BUILDKIT: 1
-
+  BUILDX_VERSION: 0.3.1
+  VERSION: ${CI_COMMIT_REF_SLUG}
 build:
   script:
-    - docker build --platform=local -o . git://github.com/docker/buildx
-    - mv buildx ~/.docker/cli-plugins/docker-buildx
-    - docker buildx build .
+    - sudo wget -O /usr/local/bin/buildx https://github.com/docker/buildx/releases/download/v${BUILDX_VERSION}/buildx-${BUILDX_VERSION}.linux-amd64
+    - sudo chmod a+x /usr/local/bin/buildx
+    - docker run --rm --privileged hypriot/qemu-register
+    - buildx create --use
+    - buildx build \
+      --platform linux/arm64/v8,linux/amd64,linux/arm/v6,linux/arm/v7,linux/386 \
+      .
