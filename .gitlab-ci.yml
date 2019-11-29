@@ -1,0 +1,12 @@
+---
+image: intermaxcloudsourcing/docker-compose:latest
+
+variables:
+  DOCKER_CLI_EXPERIMENTAL: enabled
+  DOCKER_BUILDKIT: 1
+
+build:
+  script:
+    - docker build --platform=local -o . git://github.com/docker/buildx
+    - mv buildx ~/.docker/cli-plugins/docker-buildx
+    - docker buildx build .
