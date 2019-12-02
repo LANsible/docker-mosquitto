@@ -18,5 +18,3 @@ stages:
   - post-build
   - test
   - publish
-
-container_scanning:
