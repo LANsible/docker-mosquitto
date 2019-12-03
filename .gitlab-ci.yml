@@ -4,9 +4,6 @@ image: docker:19.03
 services:
   - docker:19.03-dind
 
-variables: &variables
-  DOCKER_IMAGE_NAME: lansible/mosquitto
-
 include:
   - template: Container-Scanning.gitlab-ci.yml
   - remote: https://raw.githubusercontent.com/LANsible/gitlab-includes/master/docker-login.yml
@@ -20,10 +17,13 @@ stages:
   - publish
 
 publish_branch:
-  <<: *variables
+  variables:
+    DOCKER_IMAGE_NAME: lansible/mosquitto
 
 publish_tag:
-  <<: *variables
+  variables:
+    DOCKER_IMAGE_NAME: lansible/mosquitto
 
 publish_latest:
-  <<: *variables
+  variables:
+    DOCKER_IMAGE_NAME: lansible/mosquitto
