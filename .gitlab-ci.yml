@@ -19,7 +19,7 @@ stages:
   - test
   - publish
 
-publish_master:
+publish_branch:
   variables:
     DOCKER_IMAGE_NAME: ${DOCKER_IMAGE_NAME}
 
