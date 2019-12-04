@@ -44,3 +44,4 @@ COPY --from=builder /mosquitto/mosquitto.conf /config/mosquitto.conf
 USER mosquitto
 ENTRYPOINT ["/mosquitto"]
 CMD ["-c", "/config/mosquitto.conf"]
+EXPOSE 1883
