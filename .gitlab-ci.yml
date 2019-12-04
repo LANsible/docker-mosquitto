@@ -12,7 +12,6 @@ include:
 
 stages:
   - build
-  - post-build
   - test
   - publish
 

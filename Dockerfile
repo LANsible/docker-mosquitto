@@ -1,9 +1,6 @@
 FROM alpine:3.10 as builder
 
-ARG VERSION=master
-
-LABEL maintainer="wilmardo" \
-      description="Eclipse Mosquitto MQTT Broker, the right way"
+ENV VERSION=v.1.6.8
 
 # Add unprivileged user
 RUN echo "mosquitto:x:1000:1000:mosquitto:/:" > /etc_passwd
