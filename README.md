@@ -14,8 +14,7 @@ Also this container is way smaller!
 
 ## Running the container
 
-The default credentials are:
-
+The default credentials are (set in the mosquitto.conf):
 ```yaml
 username: mosquitto
 password: mosquitto
@@ -35,21 +34,27 @@ Use this or use it as a good start!
 cd examples/docker-compose
 docker-compose up -d mosquitto
 ```
+
+Now you should be able to connect to port 31883 with the mosquitto:mosquitto credentials
+
 ### Kubernetes
 
 The kubectl files in the examples/kubernetes I use myself to deploy.
 It uses a configmap for the configuration and it exposes mosquitto on Nodeport 31883 with a service.
 
 ```yaml
-kubectl apply -f examples/kubernetes
+kubectl apply -f examples/kubernetess
 ```
+
+Now you should be able to connect to port 31883 with the mosquitto:mosquitto credentials
 
 ## Getting the password for in the passwords file
 
-Since this container is very minimal it misses the mosquitto_passwd utility but this is published as a seperate container.
-It can be used like this:
+Since this container is very minimal it misses the mosquitto_passwd utility but you can easily run the upstream container.
 ```
-docker run -it -v $(pwd):/data lansible/mosquito_passwd -c /data/passwordfile username
+docker run -it -v $(pwd):/data eclipse-mosquitto mosquitto_passwd
+# Create passwordfile
+docker run -it -v $(pwd):/data eclipse-mosquitto mosquitto_passwd -c /data/passwordfile username
 ```
 
 ## Troubleshooting
@@ -58,11 +63,3 @@ Mosquitto not starting, try to run the container locally:
 ```
 docker run lansible/mosquitto:latest
 ```
-
-When something is going wrong you can jump to the cli like this:
-
-```
-docker run -it --entrypoint /bin/sh --user root lansible/mosquitto:latest
-```
-
-The mosquitto binary is located at `/usr/bin/mosquitto`
