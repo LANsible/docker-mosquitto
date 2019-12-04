@@ -1,0 +1,11 @@
+---
+  version: "3"
+  services:
+    mosquitto:
+      container_name: mosquitto
+      image: lansible/mosquitto:latest
+      ports:
+        - "31883:1883"
+      volumes:
+        - ./config:/config
+      restart: always
