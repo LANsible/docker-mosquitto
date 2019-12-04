@@ -63,3 +63,7 @@ Mosquitto not starting, try to run the container locally:
 ```
 docker run lansible/mosquitto:latest
 ```
+
+## Credits
+
+* [eclipse/mosquitto](https://github.com/eclipse/mosquitto)
