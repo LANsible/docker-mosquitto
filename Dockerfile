@@ -21,7 +21,7 @@ WORKDIR /mosquitto
 # WITH_MEMORY_TRACKING: disable to use less memory and less cpu
 RUN CORES=$(grep -c '^processor' /proc/cpuinfo); \
     export MAKEFLAGS="-j$((CORES+1)) -l${CORES}"; \
-    make -j "$(nproc)" \
+    make \
       CFLAGS="-Wall -O3 -static" \
       LDFLAGS="-static" \
       WITH_STATIC_LIBRARIES=yes \
