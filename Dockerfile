@@ -15,6 +15,8 @@ RUN git clone --depth 1 --branch "${VERSION}" https://github.com/eclipse/mosquit
 WORKDIR /mosquitto
 
 # Makeflags source: https://math-linux.com/linux/tip-of-the-day/article/speedup-gnu-make-build-and-compilation-process
+# WITH_STATIC_LIBRARIES default no, needed for static compile
+# WITH_SHARED_LIBRARIES default yes, needs to be no for static compile
 # WITH_MEMORY_TRACKING: disable to use less memory and less cpu
 RUN CORES=$(grep -c '^processor' /proc/cpuinfo); \
     export MAKEFLAGS="-j$((CORES+1)) -l${CORES}"; \
