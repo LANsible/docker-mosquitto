@@ -11,10 +11,10 @@ data:
   mosquitto.conf: |
     # Config file for mosquitto
     allow_anonymous false
-    password_file /mosquitto/password
+    password_file /config/passwords
     persistence false
     log_dest stdout
 
-  password: |
+  passwords: |
     # Passwords file
     mosquitto:$6$5NoZ0VhFlhc7v8P/$bVfSp/b9FhvklwyYdB3nyH8kh5YCd1V4zi+cB8u+mZyedQTMuhg05eCswdmVAGbrIgAQykAzzkJdToYoP9UEOw==
