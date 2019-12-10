@@ -8,7 +8,8 @@ RUN echo "mosquitto:x:1000:1000:mosquitto:/:" > /etc_passwd
 RUN apk --no-cache add \
         git \
         build-base \
-        openssl-dev
+        openssl-dev \
+        libwebsockets-dev
 
 RUN git clone --depth 1 --branch "${VERSION}" https://github.com/eclipse/mosquitto.git /mosquitto
 
@@ -26,7 +27,7 @@ RUN CORES=$(grep -c '^processor' /proc/cpuinfo); \
       WITH_STATIC_LIBRARIES=yes \
       WITH_SHARED_LIBRARIES=no \
       WITH_MEMORY_TRACKING=no \
-      WITH_WEBSOCKETS=no \
+      WITH_WEBSOCKETS=yes \
       binary
 
 # Minify binaries
