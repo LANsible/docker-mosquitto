@@ -33,7 +33,8 @@ RUN CORES=$(grep -c '^processor' /proc/cpuinfo); \
 # Minify binaries
 # --brute does not work
 RUN apk add --no-cache upx && \
-    upx --best /mosquitto/src/mosquitto
+    upx --best /mosquitto/src/mosquitto && \
+    upx -t /mosquitto/src/mosquitto
 
 FROM scratch
 
