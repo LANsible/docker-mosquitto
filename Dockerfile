@@ -1,3 +1,6 @@
+#######################################################################################################################
+# Build static Mosquitto
+#######################################################################################################################
 FROM alpine:3.10 as builder
 
 ENV VERSION=v.1.6.8
@@ -36,6 +39,10 @@ RUN apk add --no-cache upx && \
     upx --best /mosquitto/src/mosquitto && \
     upx -t /mosquitto/src/mosquitto
 
+
+#######################################################################################################################
+# Final scratch image
+#######################################################################################################################
 FROM scratch
 
 # Copy the unprivileged user
@@ -43,6 +50,8 @@ COPY --from=builder /etc_passwd /etc/passwd
 
 # Copy static binary
 COPY --from=builder /mosquitto/src/mosquitto /mosquitto
+
+# Add default configuration
 COPY --from=builder /mosquitto/mosquitto.conf /config/mosquitto.conf
 
 USER mosquitto
