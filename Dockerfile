@@ -45,6 +45,9 @@ RUN apk add --no-cache upx && \
 #######################################################################################################################
 FROM scratch
 
+# Add description
+LABEL org.label-schema.description="Static compiled Mosquitto in a scratch container"
+
 # Copy the unprivileged user
 COPY --from=builder /etc_passwd /etc/passwd
 
