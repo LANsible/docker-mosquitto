@@ -2,7 +2,7 @@
 # Build static Mosquitto
 #######################################################################################################################
 ARG ARCHITECTURE
-FROM multiarch/alpine:${ARCHITECTURE}-v3.10 as builder
+FROM multiarch/alpine:${ARCHITECTURE}-v3.11 as builder
 
 ENV VERSION=v.1.6.8
 
