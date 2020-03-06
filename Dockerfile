@@ -4,7 +4,7 @@
 ARG ARCHITECTURE
 FROM multiarch/alpine:${ARCHITECTURE}-v3.11 as builder
 
-ENV VERSION=v1.6.8
+ENV VERSION=v1.6.9
 
 # Add unprivileged user
 RUN echo "mosquitto:x:1000:1000:mosquitto:/:" > /etc_passwd
