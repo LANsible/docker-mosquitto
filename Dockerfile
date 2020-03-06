@@ -2,9 +2,9 @@
 # Build static Mosquitto
 #######################################################################################################################
 ARG ARCHITECTURE
-FROM multiarch/alpine:${ARCHITECTURE}-v3.10 as builder
+FROM multiarch/alpine:${ARCHITECTURE}-v3.11 as builder
 
-ENV VERSION=v.1.6.8
+ENV VERSION=v1.6.8
 
 # Add unprivileged user
 RUN echo "mosquitto:x:1000:1000:mosquitto:/:" > /etc_passwd
@@ -13,6 +13,7 @@ RUN apk --no-cache add \
         git \
         build-base \
         openssl-dev \
+        openssl-libs-static \
         libwebsockets-dev
 
 RUN git clone --depth 1 --branch "${VERSION}" https://github.com/eclipse/mosquitto.git /mosquitto
@@ -23,6 +24,8 @@ WORKDIR /mosquitto
 # WITH_STATIC_LIBRARIES default no, needed for static compile
 # WITH_SHARED_LIBRARIES default yes, needs to be no for static compile
 # WITH_MEMORY_TRACKING: disable to use less memory and less cpu
+# WITH_ADNS: disable GNU adns support
+# WITH_SRV: only used by the client https://www.eclipse.org/lists/mosquitto-dev/msg01391.html
 RUN CORES=$(grep -c '^processor' /proc/cpuinfo); \
     export MAKEFLAGS="-j$((CORES+1)) -l${CORES}"; \
     make \
@@ -32,6 +35,8 @@ RUN CORES=$(grep -c '^processor' /proc/cpuinfo); \
       WITH_SHARED_LIBRARIES=no \
       WITH_MEMORY_TRACKING=no \
       WITH_WEBSOCKETS=yes \
+      WITH_ADNS=no \
+      WITH_SRV=no \
       binary
 
 # Minify binaries
