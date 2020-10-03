@@ -4,7 +4,7 @@
 ARG ARCHITECTURE
 FROM multiarch/alpine:${ARCHITECTURE}-v3.12 as builder
 
-ENV VERSION=v1.6.10
+ENV VERSION=v1.6.12
 
 # Add unprivileged user
 RUN echo "mosquitto:x:1000:1000:mosquitto:/:" > /etc_passwd
@@ -38,10 +38,11 @@ RUN CORES=$(grep -c '^processor' /proc/cpuinfo); \
       WITH_SRV=no \
       binary
 
+# 'Install' upx from image since upx isn't available for aarch64 from Alpine
+COPY --from=lansible/upx /usr/bin/upx /usr/bin/upx
 # Minify binaries
 # --brute does not work
-RUN apk add --no-cache upx && \
-    upx --best /mosquitto/src/mosquitto && \
+RUN upx --best /mosquitto/src/mosquitto && \
     upx -t /mosquitto/src/mosquitto
 
 
