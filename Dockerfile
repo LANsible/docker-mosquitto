@@ -2,9 +2,9 @@
 # Build static Mosquitto
 #######################################################################################################################
 ARG ARCHITECTURE
-FROM multiarch/alpine:${ARCHITECTURE}-v3.11 as builder
+FROM multiarch/alpine:${ARCHITECTURE}-v3.12 as builder
 
-ENV VERSION=v1.6.9
+ENV VERSION=v1.6.12
 
 # Add unprivileged user
 RUN echo "mosquitto:x:1000:1000:mosquitto:/:" > /etc_passwd
@@ -13,8 +13,7 @@ RUN apk --no-cache add \
         git \
         build-base \
         openssl-dev \
-        openssl-libs-static \
-        libwebsockets-dev
+        openssl-libs-static
 
 RUN git clone --depth 1 --branch "${VERSION}" https://github.com/eclipse/mosquitto.git /mosquitto
 
@@ -34,15 +33,16 @@ RUN CORES=$(grep -c '^processor' /proc/cpuinfo); \
       WITH_STATIC_LIBRARIES=yes \
       WITH_SHARED_LIBRARIES=no \
       WITH_MEMORY_TRACKING=no \
-      WITH_WEBSOCKETS=yes \
+      WITH_WEBSOCKETS=no \
       WITH_ADNS=no \
       WITH_SRV=no \
       binary
 
+# 'Install' upx from image since upx isn't available for aarch64 from Alpine
+COPY --from=lansible/upx /usr/bin/upx /usr/bin/upx
 # Minify binaries
 # --brute does not work
-RUN apk add --no-cache upx && \
-    upx --best /mosquitto/src/mosquitto && \
+RUN upx --best /mosquitto/src/mosquitto && \
     upx -t /mosquitto/src/mosquitto
 
 
