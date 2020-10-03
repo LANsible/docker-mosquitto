@@ -1,7 +1,7 @@
 #  🦟 Mosquitto in Docker the right way
 
 [![Build Status](https://gitlab.com/lansible1/docker-mosquitto/badges/master/pipeline.svg)](https://gitlab.com/lansible1/docker-mosquitto/pipelines)
-[![Docker Pulls](https://img.shields.io/docker/pulls/lansible/mosquitto.svg)](https://hub.docker.com/r/lansible/hoem-assistant)
+[![Docker Pulls](https://img.shields.io/docker/pulls/lansible/mosquitto.svg)](https://hub.docker.com/r/lansible/mosquitto)
 [![Docker Version](https://images.microbadger.com/badges/version/lansible/mosquitto:latest.svg)](https://microbadger.com/images/lansible/mosquitto:latest)
 [![Docker Size/Layers](https://images.microbadger.com/badges/image/lansible/mosquitto:latest.svg)](https://microbadger.com/images/lansible/mosquitto:latest)
 
