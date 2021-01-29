@@ -10,6 +10,7 @@ metadata:
 data:
   mosquitto.conf: |
     # Config file for mosquitto
+    listener 1883
     allow_anonymous false
     password_file /config/passwords
     persistence false
