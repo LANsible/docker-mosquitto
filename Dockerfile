@@ -4,7 +4,7 @@
 ARG ARCHITECTURE
 FROM multiarch/alpine:${ARCHITECTURE}-v3.13 as builder
 
-ENV VERSION=v2.0.5 \
+ENV VERSION=v2.0.7 \
     CJSON_VERSION=v1.7.14
 
 # Add unprivileged user
@@ -46,7 +46,7 @@ WORKDIR /mosquitto/src
 RUN CORES=$(grep -c '^processor' /proc/cpuinfo); \
     export MAKEFLAGS="-j$((CORES+1)) -l${CORES}"; \
     make \
-      CFLAGS="-Wall -O3 -static -I/build" \
+      CFLAGS="-O3 -static -I/build" \
       LDFLAGS="-static -L/build/cjson" \
       WITH_STATIC_LIBRARIES=yes \
       WITH_SHARED_LIBRARIES=no \
