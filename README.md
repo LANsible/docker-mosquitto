@@ -14,21 +14,15 @@ Also this container is way smaller!
 
 ## Running the container
 
-The default credentials are (set in the mosquitto.conf):
-```yaml
-username: mosquitto
-password: mosquitto
+The default configuration allows passwordless connections. Just do and you should be able to connect to localhost:1883:
 ```
-
-### Local Docker
-```
-docker run -d lansible/mosquitto
+docker run -it -p 1883:1883 lansible/mosquitto:latest
 ```
 
 ### Docker-compose/Swarm
 
 The repository contains a basic Docker Compose file which works with Swarm.
-Use this or use it as a good start!
+Use this or use it as a good start and example how to use a password file.
 
 ```yaml
 cd examples/docker-compose

@@ -78,7 +78,7 @@ COPY --from=builder /etc_passwd /etc/passwd
 COPY --from=builder /mosquitto/src/mosquitto /mosquitto
 
 # Add default configuration
-COPY --from=builder /mosquitto/mosquitto.conf /config/mosquitto.conf
+COPY mosquitto.conf /config/mosquitto.conf
 
 USER mosquitto
 ENTRYPOINT ["/mosquitto"]
