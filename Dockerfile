@@ -4,7 +4,9 @@
 ARG ARCHITECTURE
 FROM multiarch/alpine:${ARCHITECTURE}-v3.13 as builder
 
-ENV VERSION=v2.0.7 \
+# https://github.com/eclipse/mosquitto/releases
+# https://github.com/DaveGamble/cJSON/releases
+ENV VERSION=v2.0.10 \
     CJSON_VERSION=v1.7.14
 
 # Add unprivileged user
