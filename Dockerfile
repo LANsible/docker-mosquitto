@@ -1,12 +1,11 @@
 #######################################################################################################################
 # Build static Mosquitto
 #######################################################################################################################
-ARG ARCHITECTURE
-FROM multiarch/alpine:${ARCHITECTURE}-v3.13 as builder
+FROM alpine:3.14 as builder
 
 # https://github.com/eclipse/mosquitto/releases
 # https://github.com/DaveGamble/cJSON/releases
-ENV VERSION=v2.0.10 \
+ENV VERSION=v2.0.11 \
     CJSON_VERSION=v1.7.14
 
 # Add unprivileged user
