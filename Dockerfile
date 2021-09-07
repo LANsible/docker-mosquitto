@@ -5,8 +5,8 @@ FROM alpine:3.14 as builder
 
 # https://github.com/eclipse/mosquitto/releases
 # https://github.com/DaveGamble/cJSON/releases
-ENV VERSION=v2.0.11 \
-    CJSON_VERSION=v1.7.14
+ENV VERSION=v2.0.12 \
+    CJSON_VERSION=v1.7.15
 
 # Add unprivileged user
 RUN echo "mosquitto:x:1000:1000:mosquitto:/:" > /etc_passwd
