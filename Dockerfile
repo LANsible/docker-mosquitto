@@ -1,9 +1,9 @@
 #######################################################################################################################
 # Build static Mosquitto
 #######################################################################################################################
-FROM alpine:3.14 as builder
+FROM alpine:3.15 as builder
 
-# https://github.com/eclipse/mosquitto/releases
+# https://github.com/eclipse/mosquitto/tags
 # https://github.com/DaveGamble/cJSON/releases
 ENV VERSION=v2.0.14 \
     CJSON_VERSION=v1.7.15
