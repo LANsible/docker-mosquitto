@@ -1,11 +1,13 @@
 #######################################################################################################################
 # Build static Mosquitto
 #######################################################################################################################
-FROM alpine:3.15 as builder
+FROM lansible/upx:latest as upx
+
+FROM alpine:3.16 as builder
 
 # https://github.com/eclipse/mosquitto/tags
 # https://github.com/DaveGamble/cJSON/releases
-ENV VERSION=v2.0.14 \
+ENV VERSION=v2.0.15 \
     CJSON_VERSION=v1.7.15
 
 # Add unprivileged user
@@ -57,7 +59,7 @@ RUN CORES=$(grep -c '^processor' /proc/cpuinfo); \
       WITH_SRV=no
 
 # 'Install' upx from image since upx isn't available for aarch64 from Alpine
-COPY --from=lansible/upx /usr/bin/upx /usr/bin/upx
+COPY --from=upx /usr/bin/upx /usr/bin/upx
 # Minify binaries
 # --brute does not work
 RUN upx --best /mosquitto/src/mosquitto && \
