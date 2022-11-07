@@ -1,9 +1,9 @@
 #  🦟 Mosquitto in Docker the right way
 
-[![Build Status](https://gitlab.com/lansible1/docker-mosquitto/badges/master/pipeline.svg)](https://gitlab.com/lansible1/docker-mosquitto/pipelines)
+[![Build Status](https://github.com/LANsible/docker-mosquitto/actions/workflows/docker.yml/badge.svg)](https://github.com/LANsible/docker-mosquitto/actions/workflows/docker.yml)
 [![Docker Pulls](https://img.shields.io/docker/pulls/lansible/mosquitto.svg)](https://hub.docker.com/r/lansible/mosquitto)
-[![Docker Version](https://img.shields.io/docker/v/lansible/mosquitto?sort=semver)](https://hub.docker.com/r/lansible/mosquitto)
-[![Docker Image Size](https://img.shields.io/docker/image-size/lansible/mosquitto?sort=semver)](https://hub.docker.com/r/lansible/mosquitto)
+[![Docker Version](https://img.shields.io/docker/v/lansible/mosquitto.svg?sort=semver)](https://hub.docker.com/r/lansible/mosquitto)
+[![Docker Size/Layers](https://img.shields.io/docker/image-size/lansible/mosquitto.svg?sort=semver)](https://hub.docker.com/r/lansible/mosquitto)
 
 ## Why another mosquitto container?
 When I tried to run the official Mosquitto container on Kubernetes I couldn't get it to work with a configmap.
