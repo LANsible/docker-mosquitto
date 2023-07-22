@@ -3,12 +3,12 @@
 #######################################################################################################################
 FROM lansible/upx:latest as upx
 
-FROM alpine:3.16 as builder
+FROM alpine:3.18 as builder
 
 # https://github.com/eclipse/mosquitto/tags
 # https://github.com/DaveGamble/cJSON/releases
 ENV VERSION=v2.0.15 \
-    CJSON_VERSION=v1.7.15
+    CJSON_VERSION=v1.7.16
 
 # Add unprivileged user
 RUN echo "mosquitto:x:1000:1000:mosquitto:/:" > /etc_passwd
@@ -18,7 +18,8 @@ RUN apk --no-cache add \
         build-base \
         openssl-dev \
         openssl-libs-static \
-        cmake
+        cmake \
+        upx
 
 RUN git clone --depth 1 --branch "${CJSON_VERSION}" https://github.com/DaveGamble/cJSON.git /build/cjson
 
@@ -58,8 +59,6 @@ RUN CORES=$(grep -c '^processor' /proc/cpuinfo); \
       WITH_ADNS=no \
       WITH_SRV=no
 
-# 'Install' upx from image since upx isn't available for aarch64 from Alpine
-COPY --from=upx /usr/bin/upx /usr/bin/upx
 # Minify binaries
 # --brute does not work
 RUN upx --best /mosquitto/src/mosquitto && \
