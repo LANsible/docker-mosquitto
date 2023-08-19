@@ -1,13 +1,11 @@
 #######################################################################################################################
 # Build static Mosquitto
 #######################################################################################################################
-FROM lansible/upx:latest as upx
-
 FROM alpine:3.18 as builder
 
 # https://github.com/eclipse/mosquitto/tags
 # https://github.com/DaveGamble/cJSON/releases
-ENV VERSION=v2.0.15 \
+ENV VERSION=v2.0.16 \
     CJSON_VERSION=v1.7.16
 
 # Add unprivileged user
